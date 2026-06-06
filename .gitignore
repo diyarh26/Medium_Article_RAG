@@ -1,0 +1,7 @@
+.env
+.vercel/
+.venv/
+__pycache__/
+*.pyc
+data/*.csv
+*.log
