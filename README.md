@@ -6,8 +6,8 @@ The system answers questions only from retrieved Medium article context stored i
 
 ## Live Submission
 
-- Live URL: add Vercel URL here after deployment
-- GitHub URL: add public repository URL here after pushing
+- Live URL: https://medium-article-rag-six.vercel.app
+- GitHub URL: https://github.com/diyarh26/Medium_Article_RAG
 
 ## RAG Configuration
 
