@@ -51,30 +51,3 @@ def generate_answer(system_prompt: str, user_prompt: str) -> str:
     )
 
     return response.choices[0].message.content
-
-
-def generate_search_query(question: str) -> str:
-    client = get_client()
-
-    response = client.chat.completions.create(
-        model=CHAT_MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "Rewrite the user question as one short search query for "
-                    "retrieving relevant Medium article passages. Do not answer "
-                    "the question. Do not invent article titles, authors, or "
-                    "specific facts. Prefer keywords and concepts from the user "
-                    "question. Return only the search query text."
-                ),
-            },
-            {"role": "user", "content": question},
-        ],
-    )
-
-    search_query = response.choices[0].message.content or ""
-    search_query = search_query.strip().strip("\"'")
-    search_query = " ".join(search_query.split())
-
-    return search_query[:300]

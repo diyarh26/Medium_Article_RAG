@@ -82,14 +82,13 @@ Response:
 
 1. The user question is converted into retrieval queries:
    - the original question,
-   - a rule-based keyword query,
-   - one GPT-generated search query used only for retrieval.
+   - a deterministic rule-based keyword query extracted from the question.
 2. The retrieval queries are embedded with `4UHRUIN-text-embedding-3-small`.
 3. Pinecone is queried in namespace `medium-full-700-015`.
 4. Retrieved chunks are deduplicated by `article_id`, so the final context contains distinct articles.
 5. The chat model receives the retrieved context and must answer only from that context.
 
-The GPT-generated retrieval query is not treated as evidence. It is only a search string. The final answer must still be grounded in the retrieved Medium article chunks.
+The rule-based query uses only terms from the user's question. It is used to improve recall while keeping retrieval deterministic and inexpensive. The final answer must still be grounded in the retrieved Medium article chunks.
 
 ## Local Setup
 

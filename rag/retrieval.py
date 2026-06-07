@@ -1,5 +1,5 @@
 from rag.config import TOP_K, PINECONE_NAMESPACE
-from rag.embeddings import embed_texts, generate_search_query
+from rag.embeddings import embed_texts
 from rag.pinecone_client import get_pinecone_index
 from rag.query_expansion import build_rule_based_query, unique_queries
 
@@ -19,12 +19,7 @@ def match_to_context(match) -> dict:
 def build_retrieval_queries(question: str) -> list[str]:
     rule_based_query = build_rule_based_query(question)
 
-    try:
-        gpt_query = generate_search_query(question)
-    except Exception:
-        gpt_query = ""
-
-    return unique_queries([question, rule_based_query, gpt_query])
+    return unique_queries([question, rule_based_query])
 
 
 def retrieve_context_for_queries(queries: list[str], top_k: int = TOP_K) -> list[dict]:
